@@ -1,0 +1,586 @@
+/* public/css/style.css - Fixed Version */
+
+/* --- GLOBAL STYLES --- */
+:root {
+    --primary: #4361ee;
+    --primary-dark: #3a56d4;
+    --secondary: #3f37c9;
+    --accent: #4895ef;
+    --danger: #f72585;
+    --success: #4cc9f0;
+    --warning: #f8961e;
+    --info: #577590;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --gray: #6c757d;
+    --light-gray: #e9ecef;
+    --white: #ffffff;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+    --shadow-xl: 0 20px 25px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.04);
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background-color: var(--light);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- CLIENT DASHBOARD SPECIFIC STYLES --- */
+body.client-theme {
+    background-color: #f5f7ff;
+    display: flex;
+    min-height: 100vh;
+}
+
+.client-dashboard-layout {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Sidebar Navigation */
+.client-sidebar {
+    width: 280px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    padding: 2rem 1.5rem;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+}
+
+.client-sidebar.hidden {
+    transform: translateX(-280px);
+}
+
+.client-sidebar h3 {
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.client-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.client-sidebar ul li {
+    margin-bottom: 0.5rem;
+}
+
+.client-sidebar ul li a {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    font-weight: 500;
+    gap: 0.75rem;
+}
+
+.client-sidebar ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+}
+
+.client-sidebar ul li a.active {
+    background-color: var(--white);
+    color: var(--primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.client-sidebar ul li a i {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+}
+
+/* Main Content Area */
+.client-main-content {
+    margin-left: 280px;
+    flex-grow: 1;
+    transition: margin-left 0.3s ease;
+    width: calc(100% - 280px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Added to prevent overlap issues */
+}
+
+.client-main-content.full-width {
+    margin-left: 0;
+    width: 100%;
+}
+
+/* Header Bar */
+.client-header-bar {
+    background-color: var(--white);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 90;
+}
+
+.client-header-bar h1 {
+    color: var(--primary);
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    flex-grow: 1;
+}
+
+.client-header-bar .user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.client-header-bar .user-info span {
+    color: var(--gray);
+    font-weight: 500;
+}
+
+.client-header-bar .user-info a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.client-header-bar .user-info a:hover {
+    background-color: var(--light-gray);
+}
+
+.client-sidebar-toggle {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: none;
+    margin-right: 1rem;
+    transition: var(--transition);
+}
+
+.client-sidebar-toggle:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Content Sections */
+.client-content-container {
+    padding: 2rem;
+    flex-grow: 1;
+    overflow: hidden; /* Added to prevent content overflow */
+}
+
+.client-content-section {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 2rem;
+    position: relative; /* Added for proper stacking */
+    z-index: 1; /* Added for proper stacking */
+}
+
+.client-content-section h3 {
+    color: var(--primary);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.client-content-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius: 3px;
+}
+
+/* Cards - Fixed overlapping issue */
+.client-summary-card {
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border-left: 4px solid var(--primary);
+    margin-bottom: 1.5rem; /* Added margin to prevent overlap */
+    position: relative; /* Added for proper stacking */
+}
+
+.client-summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.client-summary-card h4 {
+    color: var(--gray);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.client-summary-card p {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+}
+
+/* Grid Layouts - Fixed to prevent overlap */
+.client-grid {
+    display: grid;
+    gap: 1.5rem;
+    width: 100%;
+    overflow: hidden; /* Added to prevent overflow */
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Action Cards - Fixed to prevent overlap */
+.client-action-card {
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--dark);
+    border: 1px solid var(--light-gray);
+    height: 100%; /* Added to ensure equal height */
+    min-height: 150px; /* Added minimum height */
+}
+
+.client-action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.client-action-card:hover .client-action-icon {
+    color: var(--white);
+}
+
+.client-action-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    transition: var(--transition);
+}
+
+.client-action-card h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Forms */
+.client-form-section {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 2rem;
+}
+
+.client-form-section h3 {
+    color: var(--primary);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.client-form-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius: 3px;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    transition: var(--transition);
+    background-color: var(--light);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    text-decoration: none;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* Tables - Fixed to prevent overflow */
+.client-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: var(--white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    table-layout: fixed; /* Added to prevent table overflow */
+}
+
+.client-table th {
+    background-color: var(--primary);
+    color: var(--white);
+    font-weight: 500;
+    padding: 1rem;
+    text-align: left;
+}
+
+.client-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--light-gray);
+    vertical-align: middle;
+    word-wrap: break-word; /* Added to handle long content */
+}
+
+.client-table tr:last-child td {
+    border-bottom: none;
+}
+
+.client-table tr:hover td {
+    background-color: rgba(67, 97, 238, 0.05);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-approved {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-rejected {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status-active {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-cancelled {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Messages */
+.alert {
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid #f5c6cb;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 4px solid #c3e6cb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .client-sidebar {
+        width: 260px;
+        transform: translateX(-260px);
+    }
+
+    .client-sidebar.visible {
+        transform: translateX(0);
+    }
+
+    .client-main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .client-sidebar-toggle {
+        display: flex;
+    }
+
+    .grid-cols-2,
+    .grid-cols-3,
+    .grid-cols-4 {
+        grid-template-columns: 1fr;
+    }
+
+    .client-content-container {
+        padding: 1rem;
+    }
+
+    .client-content-section,
+    .client-form-section {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .client-header-bar {
+        padding: 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .client-header-bar h1 {
+        font-size: 1.25rem;
+        order: 2;
+        flex: 1 0 100%;
+    }
+
+    .client-sidebar-toggle {
+        order: 1;
+    }
+
+    .client-header-bar .user-info {
+        order: 3;
+        margin-left: auto;
+    }
+
+    /* Ensure cards don't overlap on small screens */
+    .client-summary-card,
+    .client-action-card {
+        margin-bottom: 1rem;
+    }
+}
